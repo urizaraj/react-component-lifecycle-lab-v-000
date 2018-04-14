@@ -6,11 +6,10 @@ class TweetWall extends React.Component {
     super(props);
 
     this.state = {
-      tweets: []
+      tweets: this.props.newTweets
     };
   }
 
-  // TODO: componentWillMount()
   // TODO: shouldComponentUpdate()
   // TODO: componentWillReceiveProps()
 
@@ -20,6 +19,19 @@ class TweetWall extends React.Component {
     return (
       <div>{tweets}</div>
     );
+  }
+
+  componentWillReceiveProps(newProps) {
+    // this.setState({
+    //   tweets: [...newProps.newTweets, ...this.state.tweets]
+    // })
+    this.state = {
+      tweets: [...newProps.newTweets, ...this.state.tweets]
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextState.tweets === this.state.tweets)
   }
 }
 
